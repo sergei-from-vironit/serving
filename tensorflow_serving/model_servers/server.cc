@@ -265,7 +265,7 @@ Status Server::BuildAndStart(const Options& server_options) {
       BuildServerCredentialsFromSSLConfigFile(server_options.ssl_config_file));
   builder.RegisterService(model_service_.get());
   builder.RegisterService(prediction_service_.get());
-  builder.SetMaxMessageSize(tensorflow::kint32max);
+  builder.SetMaxMessageSize(1024 * 1024 * 1024);
   const std::vector<GrpcChannelArgument> channel_arguments =
       parseGrpcChannelArgs(server_options.grpc_channel_arguments);
   for (GrpcChannelArgument channel_argument : channel_arguments) {
